@@ -1,25 +1,24 @@
 <!DOCTYPE html>
 <html>
+  <head>
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <!--<script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    
+  
+
+  </head>
 <body>
-    <select name="font type" id="font type">
-        <option value="times new roman">Times New Roman</option>
-        <option value="calibri">calibri</option>
-        <option value="arial">Arial</option>
-        <option value="arial black">Arial Black</option>
-      </select>
-      <select name="font size" id="font size">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-      </select>
+  <h3>Auto spell correction</h3>
       &emsp;
       <button class="go back" onclick="window.location.href='page1.html';">BACK</button>
       <br></br>
-<textarea id="text" name="textarea" rows="25" cols="150" onfocus="this.value=''">Type here....</textarea>
-  <br></br>
-  <br></br>
-<button class="reset" >RESET</button>
+  <textarea id="words" rows="25" cols="150" onfocus="this.value=''"></textarea>
+  <button onClick="submit()">Submit</button>
+<p id="demo"></p>
 <style>
     .reset{
         background-color: #4CAF50;
@@ -34,8 +33,16 @@
         cursor: pointer;
     }
 body{
-    background-color: skyblue;
+    background-color: cornflowerblue;
 }
 </style>
+  </script>
+  <script>
+    function submit(){
+    $.post("http://192.168.1.89:5000/", {words:$("#words").val()}, function(result){
+          $("#words").val(result)
+    });
+    }
+  </script>
 </body>
 </html>
